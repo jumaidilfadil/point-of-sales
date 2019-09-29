@@ -8,6 +8,8 @@ const fileUpload = require('express-fileupload')
 
 // use express
 const app = express()
+// log
+app.use(logger('dev'))
 
 app.use(express.static('./'))
 
@@ -34,6 +36,3 @@ app.use('/', routerNav)
 app.get('*', (req, res) => {
   res.send('Sorry, 404 not found')
 })
-
-// log
-app.use(logger('dev'))

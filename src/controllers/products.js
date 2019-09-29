@@ -6,15 +6,16 @@ const dateNow = new Date()
 const config = require('../configs/configs')
 const uploadFolder = 'uploads'
 const baseSiteUpload = `${config.baseSite}:${config.serverPort}/${uploadFolder}`
-const jwt = require('jsonwebtoken')
+const redis = require('redis');
+const client = redis.createClient();
 let status = 200
 
 module.exports = {
 
   getProducts: (req, res) => {
     const search = req.query.search
-    var sort = req.query.sort
-    var order = req.query.order
+    var sort = req.query.sort || 'id'
+    var order = req.query.order || 'ASC'
     const page = req.query.page
     const limit = req.query.limit
     const offset = (page - 1) * limit
@@ -45,7 +46,7 @@ module.exports = {
                 status = 200
                 var data = {
                   status,
-                  message: 'success getting all data asd',
+                  message: 'success getting all data',
                   search_name: search,
                   sort,
                   order,
@@ -55,13 +56,26 @@ module.exports = {
                   total_data,
                   data: result
                 }
+                var dataCache = {
+                  status,
+                  message: 'success getting all data from cache',
+                  search_name: search,
+                  sort,
+                  order,
+                  page,
+                  limit,
+                  total_page,
+                  total_data,
+                  data: result
+                }
+                client.set('data', JSON.stringify(dataCache))
                 res.status(status).json(data)
               })
               .catch(err => {
                 status = 500
                 res.status(status).json({
                   status,
-                  message: 'error getting total_data_all product from database'
+                  message: 'error getting total_data_all product from database (1)'
                 })
               })
           } else {
@@ -77,6 +91,18 @@ module.exports = {
               total_data,
               data: result
             }
+            dataCache = {
+              status,
+              message: 'success getting all data from cache',
+              search_name: search,
+              sort,
+              order,
+              page,
+              limit,
+              total_data,
+              data: result
+            }
+            client.set('data', JSON.stringify(dataCache))
             res.status(status).json(data)
           }
         } else {
@@ -92,9 +118,42 @@ module.exports = {
         status = 500
         res.status(status).json({
           status,
-          message: 'error getting data from database'
+          message: 'error getting data from database (2)'
         })
       })
+  },
+  
+  getProductsCache: (req, res, next) => {
+    client.get('data', (err, result) => {
+      if (err) {
+        throw err 
+      } else {
+        if (result != null) {
+          let search = req.query.search
+          let data = JSON.parse(result)
+          let sort = req.query.sort
+          let order = req.query.order
+          let page = req.query.page
+          let limit = req.query.limit
+          
+          if(search) {
+
+          } else if(sort && order && (sort !== data.sort || order !== data.order)) {
+            client.del('data')
+            next()
+          } else if(page && limit && (page !== data.page || limit !== data.limit)) {
+            client.del('data')
+            next()
+          } else {
+            res.status(200).json(JSON.parse(result))
+          } 
+
+          // client.del('data')
+        } else {
+          next()
+        }
+      }
+    })
   },
 
   addProduct: (req, res) => {
@@ -175,6 +234,7 @@ module.exports = {
                 message: 'success adding new product data',
                 dataJSON
               })
+              client.del('data')
             })
             .catch(err => {
               status = 400
@@ -246,6 +306,7 @@ module.exports = {
                 message: 'success editing product data',
                 data: dataJSON
               })
+              client.del('data')
             })
             .catch(err => {
               status = 400
@@ -280,6 +341,7 @@ module.exports = {
           message: 'success deleting product data',
           data
         })
+        client.del('data')
       })
       .catch(err => {
         status = 400
@@ -305,6 +367,7 @@ module.exports = {
             stock: stockAdd
           }
         })
+        client.del('data')
       })
       .catch(err => {
         status = 400
@@ -347,6 +410,7 @@ module.exports = {
         productModel.reduceStockProduct(stockReduce, id)
           .then(result2 => {
             res.status(status).json(stockReduceJSON)
+            client.del('data')
           })
           .catch(err => {
             status = 400

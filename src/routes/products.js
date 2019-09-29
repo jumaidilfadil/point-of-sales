@@ -9,7 +9,7 @@ const productsController = require('../controllers/products')
 const usersController = require('../controllers/users')
 
 Route
-  .get('/product', cors(), productsController.getProducts)
+  .get('/product', cors(), productsController.getProductsCache, productsController.getProducts)
   .post('/product', usersController.validateUser, productsController.addProduct)
   .patch('/product/:id', usersController.validateUser, productsController.editProduct)
   .delete('/product/:id', usersController.validateUser, productsController.deleteProduct)
