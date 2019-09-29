@@ -75,20 +75,21 @@ Example:
 {{base_site}} = http://localhost:3000
 
 **\* Required**  
+
 Usability | Method | URL | Req. Query Params | Req. Body
---------- | ------ | --- | ----------------- | ---------
-User Register | POST | {{base_site}}/user/register | - | *username<br>*password
-User Login | POST | {{base_site}}/user/login | - | *username<br>*password
-Product Show | GET | {{base_site}}/api/v1/product | search<br>sort<br>order<br>page<br>limit | -
-Product Add | POST | {{base_site}}/api/v1/product | - | *name<br>description<br>image<br>*id_category<br>*price<br>*stock
-Product Edit | PATCH | {{base_site}}/api/v1/product/:id | - | *name<br>description<br>image<br>*id_category<br>*price<br>*stock
-Product Delete | DELETE | {{base_site}}/api/v1/product/:id | - | -
-Product Add Stock | PUT | {{base_site}}/api/v1/product/stock/add/:id | - | -
-Product Reduce Stock | PUT | {{base_site}}/api/v1/product/stock/reduce/:id | - | -
-Category Show | GET | {{base_site}}/api/v1/category | - | -
-Category Add | POST | {{base_site}}/api/v1/category | - | *name
-Category Edit | PUT | {{base_site}}/api/v1/category/:id | - | *name
-Category Delete | DELETE | {{base_site}}/api/v1/category/:id | - | -
+--- | --- | --- | --- | ---
+User Register | POST | {{base_site}}/user/register | ndash; | *username<br>*password
+User Login | POST | {{base_site}}/user/login | ndash; | *username<br>*password
+Product Show | GET | {{base_site}}/api/v1/product | search<br>sort<br>order<br>page<br>limit | ndash;
+Product Add | POST | {{base_site}}/api/v1/product | ndash; | *name<br>description<br>image<br>*id_category<br>*price<br>*stock
+Product Edit | PATCH | {{base_site}}/api/v1/product/:id | ndash; | *name<br>description<br>image<br>*id_category<br>*price<br>*stock
+Product Delete | DELETE | {{base_site}}/api/v1/product/:id | ndash; | ndash;
+Product Add Stock | PUT | {{base_site}}/api/v1/product/stock/add/:id | ndash; | ndash;
+Product Reduce Stock | PUT | {{base_site}}/api/v1/product/stock/reduce/:id | ndash; | ndash;
+Category Show | GET | {{base_site}}/api/v1/category | ndash; | ndash;
+Category Add | POST | {{base_site}}/api/v1/category | ndash; | *name
+Category Edit | PUT | {{base_site}}/api/v1/category/:id | ndash; | *name
+Category Delete | DELETE | {{base_site}}/api/v1/category/:id | ndash; | ndash;
 
 ## License
 
