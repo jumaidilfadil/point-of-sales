@@ -74,7 +74,7 @@ Fill in your own {{base_site}}
 Example:  
 {{base_site}} = http://localhost:3000
 
-**\* Required**
+**\* Required**  
 Usability | Method | URL | Req. Query Params | Req. Body
 --------- | ------ | --- | ----------------- | ---------
 User Register | POST | {{base_site}}/user/register | - | *username<br>*password
