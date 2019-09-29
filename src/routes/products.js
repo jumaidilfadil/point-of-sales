@@ -11,7 +11,7 @@ const usersController = require('../controllers/users')
 Route
   .get('/product', cors(), productsController.getProducts)
   .post('/product', usersController.validateUser, productsController.addProduct)
-  .put('/product/:id', usersController.validateUser, productsController.editProduct)
+  .patch('/product/:id', usersController.validateUser, productsController.editProduct)
   .delete('/product/:id', usersController.validateUser, productsController.deleteProduct)
   .put('/product/stock/add/:id', usersController.validateUser, productsController.addStockProduct)
   .put('/product/stock/reduce/:id', usersController.validateUser, productsController.reduceStockProduct)

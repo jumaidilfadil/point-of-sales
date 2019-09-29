@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2019 at 06:20 PM
+-- Generation Time: Sep 28, 2019 at 04:07 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -98,7 +98,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
 (1, 'jum@gmail.com', '$2b$10$GOdLQIMl4aQRqxK.H0s9sOvOP0LxBnhfEJBRHVfTdACM4MuYC1S0m'),
-(2, 'jumaidilfadillah@gmail.com', '$2b$10$iU1/RZTcxkluR2gKE8TPpeSpJKEvq5Rb/PF8Sz0iu95AMvFrum5oe');
+(2, 'jumaidilfadillah@gmail.com', '$2b$10$iU1/RZTcxkluR2gKE8TPpeSpJKEvq5Rb/PF8Sz0iu95AMvFrum5oe'),
+(3, 'indra@gmail.com', '$2b$10$BBzy.a/MpcPhr7VM9eVwNODCJBd9G/4K7RnHkiqoH/zQzytPgy/yW');
 
 --
 -- Indexes for dumped tables
@@ -143,7 +144,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

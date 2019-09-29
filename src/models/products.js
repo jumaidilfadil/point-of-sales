@@ -23,6 +23,17 @@ module.exports = {
       })
     })
   },
+  getProductsTotalDataAll: () => {
+    return new Promise((resolve, reject) => {
+      conn.query('SELECT COUNT(id) AS total_data_all FROM product', (err, result) => {
+        if(!err) {
+          resolve(result)
+        } else {
+          reject(new Error(err))
+        }
+      })
+    })
+  },
   getProductsNameForEdit: (idEdit) => {
     return new Promise((resolve, reject) => {
       conn.query('SELECT name FROM product WHERE id!=?', idEdit, (err, result) => {
