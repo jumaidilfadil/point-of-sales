@@ -15,7 +15,7 @@ module.exports = {
   getProducts: (req, res) => {
     const search = req.query.search
     var sort = req.query.sort || 'id'
-    var order = req.query.order || 'ASC'
+    var order = req.query.order || 'asc'
     const page = req.query.page
     const limit = req.query.limit
     const offset = (page - 1) * limit
@@ -129,19 +129,21 @@ module.exports = {
         throw err 
       } else {
         if (result != null) {
-          let search = req.query.search
           let data = JSON.parse(result)
+          let search = req.query.search
           let sort = req.query.sort
           let order = req.query.order
           let page = req.query.page
           let limit = req.query.limit
-          
-          if(search) {
 
-          } else if(sort && order && (sort !== data.sort || order !== data.order)) {
-            client.del('data')
-            next()
-          } else if(page && limit && (page !== data.page || limit !== data.limit)) {
+          console.log(data.search_name)
+          
+          if(
+            (!search && data.search_name) ||
+            (search && search !== data.search_name) ||
+            (sort && order && (sort !== data.sort || order !== data.order)) ||
+            (page && limit && (page !== data.page || limit !== data.limit))
+          ) {
             client.del('data')
             next()
           } else {
