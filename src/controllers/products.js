@@ -135,8 +135,6 @@ module.exports = {
           let order = req.query.order
           let page = req.query.page
           let limit = req.query.limit
-
-          console.log(data.search_name)
           
           if(
             (!search && data.search_name) ||
