@@ -5,6 +5,7 @@ const routerNav = require('./src/index')
 const logger = require('morgan')
 const config = require('./src/configs/configs')
 const fileUpload = require('express-fileupload')
+const cors = require('cors')
 
 // use express
 const app = express()
@@ -29,6 +30,12 @@ const port = config.serverPort
 app.listen(port, function() {
   console.log('Server has running on port: ' + port)
 })
+
+const configCorsAllow = {
+  methods: 'GET, POST, PUT, PATCH, DELETE',
+  allowedHeaders: 'Content-Type, Authorization'
+}
+app.use(cors(configCorsAllow))
 
 app.use('/', routerNav)
 

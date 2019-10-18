@@ -1,6 +1,5 @@
 const express = require('express')
-const Route = express.Router()
-const cors = require('cors')
+const route = express.Router()
 
 const app = express()
 
@@ -8,12 +7,32 @@ const app = express()
 const productsController = require('../controllers/products')
 const usersController = require('../controllers/users')
 
-Route
-  .get('/product', cors(), productsController.getProductsCache, productsController.getProducts)
-  .post('/product', usersController.validateUser, productsController.addProduct)
-  .patch('/product/:id', usersController.validateUser, productsController.editProduct)
-  .delete('/product/:id', usersController.validateUser, productsController.deleteProduct)
-  .put('/product/stock/add/:id', usersController.validateUser, productsController.addStockProduct)
-  .put('/product/stock/reduce/:id', usersController.validateUser, productsController.reduceStockProduct)
+route
+	.get(
+		'/product',
+		productsController.getProductsCache,
+		productsController.getProducts
+	)
+	.post('/product', usersController.validateUser, productsController.addProduct)
+	.put(
+		'/product/:id',
+		usersController.validateUser,
+		productsController.editProduct
+	)
+	.delete(
+		'/product/:id',
+		usersController.validateUser,
+		productsController.deleteProduct
+	)
+	.patch(
+		'/product/stock/add/:id',
+		usersController.validateUser,
+		productsController.addStockProduct
+	)
+	.patch(
+		'/product/stock/reduce/:id',
+		usersController.validateUser,
+		productsController.reduceStockProduct
+	)
 
-module.exports = Route
+module.exports = route

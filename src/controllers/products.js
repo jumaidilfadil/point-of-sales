@@ -13,14 +13,14 @@ let status = 200
 module.exports = {
 
   getProducts: (req, res) => {
-    const search = req.query.search
+    var search = req.query.search
     var sort = req.query.sort || 'id'
     var order = req.query.order || 'asc'
     const page = req.query.page
     const limit = req.query.limit
     const offset = (page - 1) * limit
 
-    var query = `SELECT a.id, a.name, a.description, CONCAT("${baseSiteUpload}/", a.image) AS image, b.name as category, a.price, a.stock, a.date_added, a.date_updated
+    var query = `SELECT a.id, a.name, a.description, a.image, CONCAT("${baseSiteUpload}/", a.image) AS image_src, b.name as category, a.id_category, a.price, a.stock, a.date_added, a.date_updated
                   FROM product a, category b
                   WHERE a.id_category=b.id`
     if(search)
@@ -106,10 +106,11 @@ module.exports = {
             res.status(status).json(data)
           }
         } else {
-          status = 404
+          status = 200
           var data = {
             status,
-            message: 'data not found'
+            message: 'data not found',
+            data: ''
           }
           res.status(status).json(data)
         }
@@ -167,33 +168,43 @@ module.exports = {
 
         if(!name) {
           status = 403
+          let message = 'name required'
+          console.log(message)
           res.status(status).json({
             status,
-            message: 'name required'
+            message
           })
         } else if(!id_category) {
           status = 403
+          let message = 'id_category required'
+          console.log(message)
           res.status(status).json({
             status,
-            message: 'id_category required'
+            message
           })
         } else if(!price) {
           status = 403
+          let message = 'price required'
+          console.log(message)
           res.status(status).json({
             status,
-            message: 'price required'
+            message
           })
         } else if(!stock) {
           status = 403
+          let message = 'stock required'
+          console.log(message)
           res.status(status).json({
             status,
-            message: 'stock required'
+            message
           })
         } else if(nameAll.includes(name)) {
           status = 403
+          let message = 'product name already exists'
+          console.log(message)
           res.status(status).json({
             status,
-            message: 'product name already exists'
+            message
           })
         } else {
           var image
@@ -208,9 +219,11 @@ module.exports = {
               image.mv(`./uploads/${imageName}`)
             } else {
               status = 403
+              let message = 'image type must jpg, png, or gif'
+              console.log(message)
               res.status(status).json({
                 status,
-                message: 'image type must jpg, png, or gif'
+                message
               })
             }
           } else {
@@ -232,7 +245,7 @@ module.exports = {
               res.json({
                 status,
                 message: 'success adding new product data',
-                dataJSON
+                data: dataJSON
               })
               client.del('data')
             })
@@ -266,9 +279,10 @@ module.exports = {
 
         if(nameAll.includes(name)) {
           status = 403
+          let message = 'product name already exists'
           res.status(status).json({
             status,
-            message: 'product name already exists'
+            message
           })
         } else {
           const id = req.params
@@ -288,13 +302,19 @@ module.exports = {
               var dataJSON = { name, description, image: `${baseSiteUpload}/${imageName}`, id_category, price, stock, date_updated }
             } else {
               status = 403
+              let message = 'image type must jpg, png, or gif'
               res.status(status).json({
                 status,
-                message: 'image type must jpg, png, or gif'
+                message
               })
             }
           } else {
-            var data = { name, description, id_category, price, stock, date_updated }
+            if(req.body.image) {
+              let image = req.body.image
+              var data = { name, description, image, id_category, price, stock, date_updated }
+            } else {
+              var data = { name, description, id_category, price, stock, date_updated }
+            }
             var dataJSON = data
           }
 
@@ -364,7 +384,7 @@ module.exports = {
           status,
           message: 'success adding product stock data',
           data: {
-            stock: stockAdd
+            added_stock: stockAdd
           }
         })
         client.del('data')
@@ -395,14 +415,16 @@ module.exports = {
             message: 'cannot reducing because the stock is reduced too much'
           }
         } else {
+          let previousStock = stockNow
           stockNow -= stockReduce
           status = 200
           var stockReduceJSON = {
             status,
             message: 'success reducing product stock data',
             data: {
-              stock_reduced: stockReduce,
-              stock_now: stockNow
+              previous_stock: previousStock,
+              reduced_stock: stockReduce,
+              current_stock: stockNow
             }
           }
         }
