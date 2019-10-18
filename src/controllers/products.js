@@ -6,8 +6,10 @@ const dateNow = new Date()
 const config = require('../configs/configs')
 const uploadFolder = 'uploads'
 const baseSiteUpload = `${config.baseSite}:${config.serverPort}/${uploadFolder}`
+/*
 const redis = require('redis');
 const client = redis.createClient();
+*/
 let status = 200
 
 module.exports = {
