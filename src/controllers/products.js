@@ -75,6 +75,7 @@ module.exports = {
               })
               .catch(err => {
                 status = 500
+                console.log(err)
                 res.status(status).json({
                   status,
                   message: 'error getting total_data_all product from database (1)'
@@ -119,6 +120,7 @@ module.exports = {
       })
       .catch(err => {
         status = 500
+        console.log(err)
         res.status(status).json({
           status,
           message: 'error getting data from database (2)'
