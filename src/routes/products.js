@@ -8,11 +8,14 @@ const productsController = require('../controllers/products')
 const usersController = require('../controllers/users')
 
 route
+	.get('/product', productsController.getProducts)
+	/*
 	.get(
 		'/product',
 		productsController.getProductsCache,
 		productsController.getProducts
 	)
+	*/
 	.post('/product', usersController.validateUser, productsController.addProduct)
 	.put(
 		'/product/:id',
