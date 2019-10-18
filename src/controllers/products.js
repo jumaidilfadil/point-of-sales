@@ -58,6 +58,7 @@ module.exports = {
                   total_data,
                   data: result
                 }
+                /*
                 var dataCache = {
                   status,
                   message: 'success getting all data from cache',
@@ -71,6 +72,7 @@ module.exports = {
                   data: result
                 }
                 client.set('data', JSON.stringify(dataCache))
+                */
                 res.status(status).json(data)
               })
               .catch(err => {
@@ -94,6 +96,7 @@ module.exports = {
               total_data,
               data: result
             }
+            /*
             dataCache = {
               status,
               message: 'success getting all data from cache',
@@ -106,6 +109,7 @@ module.exports = {
               data: result
             }
             client.set('data', JSON.stringify(dataCache))
+            */
             res.status(status).json(data)
           }
         } else {
@@ -128,6 +132,7 @@ module.exports = {
       })
   },
   
+  /*
   getProductsCache: (req, res, next) => {
     client.get('data', (err, result) => {
       if (err) {
@@ -160,6 +165,7 @@ module.exports = {
       }
     })
   },
+  */
 
   addProduct: (req, res) => {
     productModel.getProductsName()
@@ -251,7 +257,7 @@ module.exports = {
                 message: 'success adding new product data',
                 data: dataJSON
               })
-              client.del('data')
+              // client.del('data')
             })
             .catch(err => {
               status = 400
@@ -330,7 +336,7 @@ module.exports = {
                 message: 'success editing product data',
                 data: dataJSON
               })
-              client.del('data')
+              // client.del('data')
             })
             .catch(err => {
               status = 400
@@ -365,7 +371,7 @@ module.exports = {
           message: 'success deleting product data',
           data
         })
-        client.del('data')
+        // client.del('data')
       })
       .catch(err => {
         status = 400
@@ -391,7 +397,7 @@ module.exports = {
             added_stock: stockAdd
           }
         })
-        client.del('data')
+        // client.del('data')
       })
       .catch(err => {
         status = 400
@@ -436,7 +442,7 @@ module.exports = {
         productModel.reduceStockProduct(stockReduce, id)
           .then(result2 => {
             res.status(status).json(stockReduceJSON)
-            client.del('data')
+            // client.del('data')
           })
           .catch(err => {
             status = 400
