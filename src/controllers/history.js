@@ -73,5 +73,28 @@ module.exports = {
 					message: 'Error getting recent orders.'
 				})
 			})
+	},
+	getOrders: (req, res) => {
+		const invoice = req.params
+		const data = invoice
+
+		historyModel
+			.getOrders(data)
+			.then(result => {
+				status = 200
+				res.json({
+					status: 200,
+					message: 'Success getting all orders by invoice.',
+					data: result
+				})
+			})
+			.catch(err => {
+				status = 500
+				console.log(err)
+				res.status(status).json({
+					status,
+					message: 'Error getting orders by invoice.'
+				})
+			})
 	}
 }

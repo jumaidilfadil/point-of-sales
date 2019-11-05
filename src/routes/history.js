@@ -20,5 +20,10 @@ route.get(
 	usersController.validateUser,
 	historyController.getRecentOrders
 )
+route.get(
+	'/history/orders/:invoice',
+	usersController.validateUser,
+	historyController.getOrders
+)
 
 module.exports = route

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2019 at 03:36 PM
+-- Generation Time: Nov 05, 2019 at 11:13 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.6
 
@@ -84,7 +84,13 @@ INSERT INTO `history` (`id`, `invoice`, `username`, `date`, `product_name`, `pri
 (32, '20191018133428', 'jum', '2019-10-18 13:34:28', 'Telur Dadar', 8000, 1),
 (33, '20191018133428', 'jum', '2019-10-18 13:34:28', 'Jus Melon', 9000, 1),
 (34, '20191018134147', 'jum', '2019-10-18 13:41:47', 'Telur Dadar', 8000, 1),
-(35, '20191018134147', 'jum', '2019-10-18 13:41:47', 'Jus Melon', 9000, 1);
+(35, '20191018134147', 'jum', '2019-10-18 13:41:47', 'Jus Melon', 9000, 1),
+(36, '20191105154736', 'jum', '2019-11-04 15:47:36', 'Ayam Bakar', 14000, 2),
+(37, '20191105154736', 'jum', '2019-11-04 15:47:36', 'Jus Mangga', 8000, 2),
+(38, '20191105154807', 'jum', '2019-11-05 15:48:07', 'Ayam Bakar', 14000, 3),
+(39, '20191105154807', 'jum', '2019-11-05 15:48:07', 'Rendang', 13000, 2),
+(40, '20191105154807', 'jum', '2019-11-05 15:48:07', 'Jus Mangga', 8000, 2),
+(41, '20191105154807', 'jum', '2019-11-05 15:48:07', 'Jus Melon', 9000, 3);
 
 -- --------------------------------------------------------
 
@@ -114,7 +120,11 @@ INSERT INTO `product` (`id`, `name`, `description`, `image`, `id_category`, `pri
 (3, 'Telur Bulat', 'Egg Circle', '20191010113435_telur-bulat.jpg', 1, 6000, 5, '2019-10-10 11:34:35', '2019-10-10 11:34:35'),
 (4, 'Jus Melon', 'Juice', '20191010113435_jus-melon.jpg', 2, 9000, 12, '2019-10-10 11:34:35', '2019-10-10 11:34:35'),
 (5, 'Jus Mangga', 'Mango Juice', '20191010113435_jus-mangga.jpg', 2, 8000, 123, '2019-10-10 11:34:35', NULL),
-(6, 'Telur Dadar', 'Dadar Egg', '20191014135822_telur-dadar.jpg', 1, 8000, 2, '2019-10-14 13:58:22', '2019-10-14 13:58:22');
+(6, 'Telur Dadar', 'Dadar Egg', '20191014135822_telur-dadar.jpg', 1, 8000, 2, '2019-10-14 13:58:22', '2019-10-14 13:58:22'),
+(7, 'Dendeng Balado', 'Dendeng dengan sambal balado.', '20191105163726_dendeng-balado.jpg', 1, 17000, 20, '2019-11-05 16:37:26', NULL),
+(8, 'Gulai Tunjang', 'Tunjang dengan kuah gulai.', '20191105163726_gulai-tunjang.jpg', 1, 13000, 30, '2019-11-05 16:37:26', NULL),
+(9, 'Jus Jeruk', 'Jus dengan buah jeruk asli.', '20191105163726_jus-jeruk.jpg', 2, 9000, 30, '2019-11-05 16:37:26', NULL),
+(10, 'Aqua', '600ml', '20191105163726_aqua.png', 2, 5000, 100, '2019-11-05 16:37:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -179,13 +189,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
